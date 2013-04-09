@@ -96,6 +96,10 @@ class utest_Polynomials(unittest.TestCase):
         self.assertNotEqual(p1, p3, "Inequality fails")
         self.assertNotEqual(p2, p3, "Inequality fails")
 
+        # a trap!
+        p4 = Polynomial("x^8 + 0x + 1")
+        self.assertEqual(p1, p4, "Equality doesn't recognise 0")
+
 #==============================================================================
 if (__name__ == "__main__"):
     unittest.main(verbosity=2)
