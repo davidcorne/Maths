@@ -21,6 +21,7 @@ class Polynomial(object):
 
     def parse_polynomial_string(self, polynomial_as_string):
         poly_list = polynomial_as_string.split()
+        sign = 1
         for item in poly_list:
             if (not item in ("-", "+")):
                 split_list = item.split(self.var)
@@ -33,9 +34,13 @@ class Polynomial(object):
                         power = 1
                     else:
                         power = int(power[1:])
-                    coefficient = float(coefficient.rstrip("*"))
+                    coefficient = sign * float(coefficient.rstrip("*"))
                     self.coefficients[power] = coefficient
-
+            elif (item == "-"):
+                sign = -1
+            elif (item == "+"):
+                sign = 1
+                
     def __getitem__(self, index):
         """\
         This is used to get the index'th coefficient of the polynomial.\
