@@ -79,6 +79,9 @@ class utest_Polynomials(unittest.TestCase):
             "x^2x"
             )
 
+        p2 = Polynomial("x^2 + x^2")
+        self.assertEqual(p2[2], 2, "Parser does not add coefficients")
+
     def test_equality(self):
         p1 = Polynomial("x^8 + 1")
         p2 = Polynomial("x^8 + 1")
