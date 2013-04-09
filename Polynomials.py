@@ -30,6 +30,8 @@ class Polynomial(object):
                 sign = int(item + "1")
             else:
                 split_list = item.split(var)
+                power = None
+                coefficient = None
                 if (len(split_list) == 2):
                     # it's a power of x, so it should be 
                     # ["coefficient", "power"]
@@ -45,12 +47,17 @@ class Polynomial(object):
                         sign = 1
                     else:
                         coefficient = sign * float(coefficient.rstrip("*"))
-                    self.coefficients[power] = coefficient
                 elif (len(split_list) == 1):
                     # it's the constant
-                    self.coefficients[0] = sign*float(split_list[0])
+                    power = 0
+                    coefficient = sign * float(split_list[0])
                 else:
                     raise PolynomialParserException
+                # add the coefficients if they already exist
+                if (power in self.coefficients):
+                    self.coefficients[power] += coefficient
+                else:
+                    self.coefficients[power] = coefficient
                 
     def __getitem__(self, index):
         """\
