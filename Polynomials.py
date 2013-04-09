@@ -66,6 +66,7 @@ class Polynomial(object):
     def __eq__(self, other):
         equal = True
         if (self.coefficients != other.coefficients):
+            # there may be coefficients which are 0, returns a false not equal
             self_set = set(self.coefficients.keys())
             other_set = set(other.coefficients.keys())
             in_self = self_set - other_set
@@ -115,6 +116,7 @@ class utest_Polynomials(unittest.TestCase):
         # a trap!
         p4 = Polynomial("x^8 + 0x + 1")
         self.assertEqual(p1, p4, "Equality doesn't recognise 0")
+        self.assertEqual(p4, p1, "Equality doesn't recognise 0")
 
 #==============================================================================
 if (__name__ == "__main__"):
