@@ -62,7 +62,7 @@ class Polynomial(object):
 class utest_Polynomials(unittest.TestCase):
     
     def test_parser(self):
-        p1 = Polynomial("1x^2 - 2*x + 4")
+        p1 = Polynomial("x^2 - 2*x + 4")
         self.assertEqual(p1[2], 1, "Coefficent of x^2 is not 1")
         self.assertEqual(p1[1], -2, "Coefficent of x is not -2")
         self.assertEqual(p1[0], 4, "Constant is not 4")
