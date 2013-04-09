@@ -64,7 +64,23 @@ class Polynomial(object):
         return self.coefficients[index]
 
     def __eq__(self, other):
-        return self.coefficients == other.coefficients
+        equal = True
+        if (self.coefficients != other.coefficients):
+            self_set = set(self.coefficients.keys())
+            other_set = set(other.coefficients.keys())
+            in_self = self_set - other_set
+            if (in_self):
+                # keys in self not in other
+                for power in in_self:
+                    if (self[power] != 0):
+                        equal = False
+            not_in_self = other_set - self_set
+            if (not_in_self):
+                # keys in other not in self
+                for power in not_in_self:
+                    if (other[power] != 0):
+                        equal = False
+        return equal
 
     def __ne__(self, other):
         return not self == other
