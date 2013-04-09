@@ -16,15 +16,14 @@ class Polynomial(object):
         keyword argument var is the variable used for these polynomials.\
         """
         self.coefficients = dict()
-        self.var = var
-        self.parse_polynomial_string(polynomial_as_string)
+        self.parse_polynomial_string(polynomial_as_string, var)
 
-    def parse_polynomial_string(self, polynomial_as_string):
+    def parse_polynomial_string(self, polynomial_as_string, var):
         poly_list = polynomial_as_string.split()
         sign = 1
         for item in poly_list:
             if (not item in ("-", "+")):
-                split_list = item.split(self.var)
+                split_list = item.split(var)
                 if (len(split_list) == 2):
                     # it's a power of x, so it should be 
                     # ["coefficient", "power"]
@@ -36,6 +35,9 @@ class Polynomial(object):
                         power = int(power[1:])
                     coefficient = sign * float(coefficient.rstrip("*"))
                     self.coefficients[power] = coefficient
+                elif (len(split_list) == 1):
+                    # it's the constant
+                    self.coefficients[0] = sign*float(split_list[0])
             elif (item == "-"):
                 sign = -1
             elif (item == "+"):
@@ -54,6 +56,7 @@ class utest_Polynomials(unittest.TestCase):
         p1 = Polynomial("1x^2 - 2*x + 4")
         self.assertEqual(p1[2], 1, "Coefficent of x^2 is not 1")
         self.assertEqual(p1[1], -2, "Coefficent of x is not -2")
+        self.assertEqual(p1[0], 4, "Constant is not 4")
 
 #==============================================================================
 if (__name__ == "__main__"):
