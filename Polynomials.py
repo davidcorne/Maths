@@ -2,6 +2,7 @@
 # Written by: DGC
 
 # python imports
+import unittest
 
 # local imports
 
@@ -16,7 +17,14 @@ class Polynomial(object):
         """
         pass
 
+#==============================================================================
+class utest_Polynomials(unittest.TestCase):
+    
+    def test_parser(self):
+        p1 = Polynomial("x^2 - 2*x + 4")
+        self.assertEqual(p1[2], 1, "Coefficent of x^1 is not 1")
+        p2 = Polynomial("x^2 - 2*x + 4")
 
 #==============================================================================
 if (__name__ == "__main__"):
-    print help(Polynomial)
+    unittest.main(verbosity=2)
