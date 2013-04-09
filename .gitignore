@@ -2,3 +2,6 @@
 #*#
 *~
 *.pyc
+
+Points/*
+Primes/*
