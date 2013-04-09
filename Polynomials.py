@@ -22,7 +22,9 @@ class Polynomial(object):
         poly_list = polynomial_as_string.split()
         sign = 1
         for item in poly_list:
-            if (not item in ("-", "+")):
+            if (item in ("-", "+")):
+                sign = int(item + "1")
+            else:
                 split_list = item.split(var)
                 if (len(split_list) == 2):
                     # it's a power of x, so it should be 
@@ -38,10 +40,6 @@ class Polynomial(object):
                 elif (len(split_list) == 1):
                     # it's the constant
                     self.coefficients[0] = sign*float(split_list[0])
-            elif (item == "-"):
-                sign = -1
-            elif (item == "+"):
-                sign = 1
                 
     def __getitem__(self, index):
         """\
