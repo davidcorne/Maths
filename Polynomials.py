@@ -58,6 +58,12 @@ class Polynomial(object):
         """
         return self.coefficients[index]
 
+    def __eq__(self, other):
+        return self.coefficients == other.coefficients
+
+    def __ne__(self, other):
+        return not self == other
+
 #==============================================================================
 class utest_Polynomials(unittest.TestCase):
     
@@ -72,6 +78,15 @@ class utest_Polynomials(unittest.TestCase):
             Polynomial,
             "x^2x"
             )
+
+    def test_equality(self):
+        p1 = Polynomial("x^8 + 1")
+        p2 = Polynomial("x^8 + 1")
+        p3 = Polynomial("x^7 + 1")
+        self.assertEqual(p1, p2, "Equality fails.")
+        self.assertEqual(p1, p2, "Equality fails.")
+        self.assertNotEqual(p1, p3, "Inequality fails")
+        self.assertNotEqual(p2, p3, "Inequality fails")
 
 #==============================================================================
 if (__name__ == "__main__"):
