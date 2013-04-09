@@ -7,6 +7,10 @@ import unittest
 # local imports
 
 #==============================================================================
+class PolynomialParserException(Exception):
+    pass
+
+#==============================================================================
 class Polynomial(object):
     
     def __init__(self, polynomial_as_string, var="x"):
@@ -35,11 +39,18 @@ class Polynomial(object):
                         power = 1
                     else:
                         power = int(power[1:])
-                    coefficient = sign * float(coefficient.rstrip("*"))
+                    if not coefficient:
+                        # it's x^1
+                        coefficient = 1
+                        sign = 1
+                    else:
+                        coefficient = sign * float(coefficient.rstrip("*"))
                     self.coefficients[power] = coefficient
                 elif (len(split_list) == 1):
                     # it's the constant
                     self.coefficients[0] = sign*float(split_list[0])
+                else:
+                    raise PolynomialParserException
                 
     def __getitem__(self, index):
         """\
@@ -55,6 +66,12 @@ class utest_Polynomials(unittest.TestCase):
         self.assertEqual(p1[2], 1, "Coefficent of x^2 is not 1")
         self.assertEqual(p1[1], -2, "Coefficent of x is not -2")
         self.assertEqual(p1[0], 4, "Constant is not 4")
+
+        self.assertRaises(
+            PolynomialParserException,
+            Polynomial,
+            "x^2x"
+            )
 
 #==============================================================================
 if (__name__ == "__main__"):
