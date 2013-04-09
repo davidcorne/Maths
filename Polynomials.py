@@ -54,10 +54,8 @@ class Polynomial(object):
                 else:
                     raise PolynomialParserException
                 # add the coefficients if they already exist
-                if (power in self.coefficients):
-                    self.coefficients[power] += coefficient
-                else:
-                    self.coefficients[power] = coefficient
+                self.coefficients.setdefault(power, 0)
+                self.coefficients[power] += coefficient
                 
     def __getitem__(self, index):
         """\
