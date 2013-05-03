@@ -76,11 +76,6 @@ class Polynomial(object):
                     if (self[power] != 0):
                         equal = False
             not_in_self = other_set - self_set
-            if (not_in_self):
-                # keys in other not in self
-                for power in not_in_self:
-                    if (other[power] != 0):
-                        equal = False
         return equal
 
     def __ne__(self, other):

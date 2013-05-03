@@ -4,6 +4,7 @@
 # continue is the next number is |a - b| etc.
 # eg 7, 9, 2, 7, 5, 2, 3, 1, 2, 1, 1, 0, 1, 1, 0 ...
 # this repeats when it reaches 0
+#
 
 def sequence(a, b):
     " prints how many numbers it takes to get to 0"

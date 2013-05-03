@@ -4,6 +4,17 @@
 
 import math
 
+#==============================================================================
+def fibonacci_generator(limit=10000000):
+    i = 0
+    j = 1
+    while (True):
+        if (i > limit):
+            break
+        yield i
+        i, j = j, i+j
+
+#==============================================================================
 def fibonacci_less(n):
     # returns all fibonacci numbers less than n
     fibon = [1,1]
@@ -13,6 +24,7 @@ def fibonacci_less(n):
         num +=1
     return fibon[0:num]
 
+#==============================================================================
 def fibonacci_num(n):
     # returns a list of the first n fibonacci number
     fibon = [1,1]
@@ -20,12 +32,14 @@ def fibonacci_num(n):
         fibon.append(fibon[num] + fibon[num-1])
     return fibon
     
+#==============================================================================
 def exact_fibonacci(n):
     """ Returns the nth fibonacci number using the exact formula. """
     Phi = ((1 + math.sqrt(5)) / 2.0)
     phi = ((1 - math.sqrt(5)) / 2.0)
     return (((Phi ** n) - (phi ** n)) / math.sqrt(5))
 
+#==============================================================================
 def fibonacci_num_big(n):
     # returns the nth fibonacci number, works for big number as none stored
     f_1 = 1
@@ -38,7 +52,8 @@ def fibonacci_num_big(n):
         num +=1
     return f_2
     
-if (__name__ == "__main__"):
+#==============================================================================
+def main():
     fibon = fibonacci_num(200)
     num = 0
     broke = 0
@@ -58,3 +73,9 @@ if (__name__ == "__main__"):
 #print("\nnumber of digits:")
 #print(len(str(fibonacci)))
 
+
+#==============================================================================
+if (__name__ == "__main__"):
+    gen = fibonacci_generator()
+    for i in gen:
+        print i

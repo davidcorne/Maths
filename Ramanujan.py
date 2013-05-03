@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # Written by: DGC
+# Inspired from here
+# http://www.johndcook.com/blog/2012/09/25/ramanujans-factorial-approximation/
 
 # python imports
 import math
