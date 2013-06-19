@@ -96,9 +96,45 @@ class utest_Matrix(unittest.TestCase):
         I *= I
         self.assertEqual(I, J)
 
+    def test_pow(self):
+        I = IdentityMatrix(5)
+        J = I ** 20
+        self.assertEqual(I, J)
+
+        m = Matrix(2, 2)
+        m[0][0] = 1
+        m[0][1] = 2
+        m[1][0] = 2
+        m[1][1] = 1
+
+        square = Matrix(2, 2)
+        square[0][0] = 5
+        square[0][1] = 4
+        square[1][0] = 4
+        square[1][1] = 5
+        
+        self.assertEqual(m * m, m ** 2)
+        self.assertEqual(m ** 2, square)
+
+        cube = Matrix(2, 2)
+        cube[0][0] = 13
+        cube[0][1] = 14
+        cube[1][0] = 14
+        cube[1][1] = 13
+
+        self.assertEqual(m * m * m, m ** 3)
+        self.assertEqual(m ** 3, cube)
+
 #==============================================================================
 class utest_SquareMatrix(unittest.TestCase):
-    pass
+
+    def test_ctor(self):
+        m = Matrix(3, 3)
+        self.assertIsInstance(m, SquareMatrix)
+        m = Matrix(3, 5)
+        self.assertNotIsInstance(m, SquareMatrix)
+        # one argument should be a type error not a range error
+        self.assertRaises(TypeError, Matrix, 5)
 
 #==============================================================================
 if (__name__ == "__main__"):

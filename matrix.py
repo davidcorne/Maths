@@ -146,7 +146,7 @@ class BaseMatrix(object):
 class Matrix(BaseMatrix):
     
     def __new__(cls, *arguments, **keyword_arguments):
-        if (arguments[0] == arguments[1]):
+        if (len(arguments) >= 2 and arguments[0] == arguments[1]):
             instance = object.__new__(SquareMatrix)
             instance.__init__(
                 arguments[0],
@@ -189,17 +189,4 @@ class ColumnVector(BaseMatrix):
 
 #==============================================================================
 if (__name__ == "__main__"):
-    m = Matrix(3, 3)
-    print m
-    print ""
-    m = Matrix(3, 3, lambda a,b: int(a==b))
-    print m
-    print ""
-    def f(a, b):
-        return int(a==b)
-    m = Matrix(3, 3, lambda a,b: int(a==b))
-    print m
-    print ""
-    m = Matrix(3, 3, assignment=lambda a,b: int(a==b))
-    print m
-    print ""
+    pass
