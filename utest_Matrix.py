@@ -10,6 +10,9 @@ from matrix import *
 #==============================================================================
 class utest_Matrix(unittest.TestCase):
     
+    def test_ctor(self):
+        self.assertRaises(TypeError, Matrix, -1, -1)
+
     def test_add(self):
         A = Matrix(1, 2)
         A[0][0] = 5
