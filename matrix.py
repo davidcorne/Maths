@@ -25,6 +25,8 @@ class Matrix(object):
 
         Note, this is indexed from zero not one.
         """
+        if (x < 1 or y < 1):
+            raise TypeError("Matrix dimensions should be positive")
         self.x = x
         self.y = y
         self.matrix = []
@@ -153,5 +155,23 @@ class IdentityMatrix(SquareMatrix):
         super(IdentityMatrix, self).__init__(size, lambda a,b: int(a==b))
 
 #==============================================================================
+class RowVector(Matrix):
+    
+    def __init__(self, columns, assignment=lambda a: 0):
+        super(RowVector, self).__init__(columns, 1, lambda a,b: assignment(a))
+
+#==============================================================================
+class ColumnVector(Matrix):
+    
+    def __init__(self, rows, assignment=lambda a: 0):
+        super(ColumnVector, self).__init__(1, rows, lambda a,b: assignment(b))
+
+#==============================================================================
 if (__name__ == "__main__"):
-    pass
+    r = RowVector(5, lambda a: a)
+    print r
+    print ""
+    v = ColumnVector(5, lambda a: a)
+    print v
+    print""
+    print r * v
