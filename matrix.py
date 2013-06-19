@@ -4,7 +4,7 @@
 import copy
 
 #==============================================================================
-class Matrix(object):
+class BaseMatrix(object):
     
     def __init__(self, x, y, assignment=lambda a,b: 0):
         """
@@ -143,10 +143,31 @@ class Matrix(object):
         return m
 
 #==============================================================================
-class SquareMatrix(Matrix):
+class Matrix(BaseMatrix):
+    
+    def __new__(cls, *arguments, **keyword_arguments):
+        if (arguments[0] == arguments[1]):
+            instance = object.__new__(SquareMatrix)
+            instance.__init__(
+                arguments[0],
+                *arguments[2:],
+                **keyword_arguments
+                )
+        else:
+            instance = object.__new__(cls)
+        return instance
+
+#==============================================================================
+class SquareMatrix(BaseMatrix):
 
     def __init__(self, size, assignment=lambda a,b: 0):
         super(SquareMatrix, self).__init__(size, size, assignment)
+
+    def determinant(self):
+        return 0
+    
+    def singular(self):
+        return self.determinant() == 0
 
 #==============================================================================
 class IdentityMatrix(SquareMatrix):
@@ -155,23 +176,30 @@ class IdentityMatrix(SquareMatrix):
         super(IdentityMatrix, self).__init__(size, lambda a,b: int(a==b))
 
 #==============================================================================
-class RowVector(Matrix):
+class RowVector(BaseMatrix):
     
     def __init__(self, columns, assignment=lambda a: 0):
         super(RowVector, self).__init__(columns, 1, lambda a,b: assignment(a))
 
 #==============================================================================
-class ColumnVector(Matrix):
+class ColumnVector(BaseMatrix):
     
     def __init__(self, rows, assignment=lambda a: 0):
         super(ColumnVector, self).__init__(1, rows, lambda a,b: assignment(b))
 
 #==============================================================================
 if (__name__ == "__main__"):
-    r = RowVector(5, lambda a: a)
-    print r
+    m = Matrix(3, 3)
+    print m
     print ""
-    v = ColumnVector(5, lambda a: a)
-    print v
-    print""
-    print r * v
+    m = Matrix(3, 3, lambda a,b: int(a==b))
+    print m
+    print ""
+    def f(a, b):
+        return int(a==b)
+    m = Matrix(3, 3, lambda a,b: int(a==b))
+    print m
+    print ""
+    m = Matrix(3, 3, assignment=lambda a,b: int(a==b))
+    print m
+    print ""
