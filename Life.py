@@ -121,9 +121,32 @@ def blinker(x, y):
     blinker[2][3] = 1
     return blinker
 
+def pulsar(x, y):
+    """
+    Returns an x by y matrix with the top left corner containing this
+    
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 1 1 1 0 0 0 1 1 1 0 0 0
+    0 1 0 0 0 0 1 0 1 0 0 0 0 1 0
+    0 1 0 0 0 0 1 0 1 0 0 0 0 1 0
+    0 1 0 0 0 0 1 0 1 0 0 0 0 1 0
+    0 0 0 1 1 1 0 0 0 1 1 1 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0    
+    0 0 0 1 1 1 0 0 0 1 1 1 0 0 0
+    0 1 0 0 0 0 1 0 1 0 0 0 0 1 0
+    0 1 0 0 0 0 1 0 1 0 0 0 0 1 0
+    0 1 0 0 0 0 1 0 1 0 0 0 0 1 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 0 0 1 1 1 0 0 0 1 1 1 0 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    """
+    assert x > 4 and y > 14
+    pulsar = matrix.Matrix(x, y)
+    return pulsar
+
 #==============================================================================
 if (__name__ == "__main__"):
-    grid = blinker(50, 50)
+    grid = pulsar(50, 50)
     for i in range(1000):
         time.sleep(0.25)
         print(grid)
