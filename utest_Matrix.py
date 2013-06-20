@@ -22,8 +22,48 @@ class utest_Matrix(unittest.TestCase):
             )
         expected = Matrix(4, 3, lambda a,b: a+b+1)
         self.assertEqual(m, expected)
-            
 
+        m = Matrix.FromRows(
+            [
+                [1, 2, 3, 4],
+                [2, 3, 4, 5, 6],
+                [3, 4, 5, 6],
+                ]
+            )
+        expected = Matrix(5, 3, lambda a,b: a+b+1)
+        expected[4][0] = 0
+        expected[4][2] = 0
+        self.assertEqual(m, expected)
+
+        m = Matrix.FromRows(
+            [
+                [1, 2,],
+                [2, 1,],
+                ],
+            3, 3
+            )
+        expected = Matrix(3, 3)
+        expected[0][0] = 1
+        expected[1][0] = 2
+        expected[0][1] = 2
+        expected[1][1] = 1
+        self.assertEqual(m, expected)
+
+        self.assertRaises(
+            TypeError,
+            Matrix.FromRows,
+            [[1, 2, 3, 4]],
+            1,
+            1
+            )
+        self.assertRaises(
+            TypeError,
+            Matrix.FromRows,
+            [[1], [2], [3], [4]],
+            1,
+            1
+            )
+            
     def test_add(self):
         A = Matrix(1, 2)
         A[0][0] = 5

@@ -37,9 +37,12 @@ class BaseMatrix(object):
             self.matrix.append(column)
 
     @classmethod
-    def FromRows(cls, lists):
+    def FromRows(cls, lists, x=None, y=None):
         """
         Takes a list of rows which are read into the matrix.
+
+        This creates an x by y matrix if given, otherwise it uses the 
+        dimensions from the lists/
         
         This takes a list of rows so you can define a matrix naturally like 
         this:
@@ -51,13 +54,62 @@ class BaseMatrix(object):
                 [3, 4, 5],
                 ]
             )
-        
-        Precondition: rows must be of equal size
+
+        This makes
+        1 2 3
+        2 3 4
+        3 4 5
+
+        but this
+
+        m = Matrix.FromRows(
+            [
+                [1, 2, 3],
+                [2, 3, 4],
+                [3, 4, 5],
+                ],
+            4, 4
+            )
+
+        makes
+        1 2 3 0
+        2 3 4 0
+        3 4 5 0
+        0 0 0 0
+
+        m = Matrix.FromRows(
+            [
+                [1, 2, 3],
+                [2, 3, 4, 5],
+                [3, 4, 5],
+                ]
+            )
+
+        makes
+        1 2 3 0
+        2 3 4 5
+        3 4 5 0
         """
-        m = cls(len(lists[0]), len(lists))
-        for i in range(m.x):
-            for j in range(m.y):
-                m[i][j] = lists[j][i]
+        # find the biggest row
+        new_x = 0
+        for row in lists:
+            if (len(row) > new_x):
+                new_x = len(row)
+        if (x is None):
+            x = new_x
+        elif (x < new_x):
+            raise TypeError("values outside x range")
+        new_y = len(lists)
+
+        if (y is None):
+            y = new_y
+        elif (y < new_y):
+            raise TypeError("values outside y range")
+
+        m = cls(x, y)
+        for i, row in enumerate(lists):
+            for j, value in enumerate(row):
+                m[j][i] = value
         return m
 
     def __repr__(self):
