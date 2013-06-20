@@ -142,6 +142,8 @@ def pulsar(x, y):
     0 0 0 0 1 1 1 0 0 0 1 1 1 0 0 0 0 0 
     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+
+    Precondition: x > 17 and y > 17
     """
     assert x > 17 and y > 17
     
@@ -174,8 +176,8 @@ def pulsar(x, y):
 
 #==============================================================================
 if (__name__ == "__main__"):
-    grid = pulsar(15, 15)
-    for i in range(2):
+    grid = pulsar(18, 18)
+    for i in range(20):
         time.sleep(0.25)
         print(grid)
         print
