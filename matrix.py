@@ -101,6 +101,13 @@ class BaseMatrix(object):
                     equal = False
         return equal
 
+    def __copy__(self):
+        m = Matrix(self.x, self.y)
+        for i in range(self.x):
+            for j in range(self.y):
+                m[i][j] = self[i][j]
+        return m
+        
     def __radd__(self, other):
         return self + other
 

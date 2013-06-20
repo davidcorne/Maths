@@ -128,6 +128,14 @@ class utest_Matrix(unittest.TestCase):
         self.assertEqual(m * m * m, m ** 3)
         self.assertEqual(m ** 3, cube)
 
+    def test_copy(self):
+        m = Matrix(3, 3)
+        m[2][2] = 5
+        c = copy.copy(m)
+        self.assertEqual(m, c)
+        c[1][1] = -5.0
+        self.assertNotEqual(m, c)
+
 #==============================================================================
 class utest_SquareMatrix(unittest.TestCase):
 
