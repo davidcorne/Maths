@@ -13,6 +13,17 @@ class utest_Matrix(unittest.TestCase):
     def test_ctor(self):
         self.assertRaises(TypeError, Matrix, -1, -1)
 
+        m = Matrix.FromRows(
+            [
+                [1, 2, 3, 4],
+                [2, 3, 4, 5],
+                [3, 4, 5, 6],
+                ]
+            )
+        expected = Matrix(4, 3, lambda a,b: a+b+1)
+        self.assertEqual(m, expected)
+            
+
     def test_add(self):
         A = Matrix(1, 2)
         A[0][0] = 5

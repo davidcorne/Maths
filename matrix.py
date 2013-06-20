@@ -36,6 +36,30 @@ class BaseMatrix(object):
                 column.append(assignment(i, j))
             self.matrix.append(column)
 
+    @classmethod
+    def FromRows(cls, lists):
+        """
+        Takes a list of rows which are read into the matrix.
+        
+        This takes a list of rows so you can define a matrix naturally like 
+        this:
+        
+        m = Matrix.FromRows(
+            [
+                [1, 2, 3],
+                [2, 3, 4],
+                [3, 4, 5],
+                ]
+            )
+        
+        Precondition: rows must be of equal size
+        """
+        m = cls(len(lists[0]), len(lists))
+        for i in range(m.x):
+            for j in range(m.y):
+                m[i][j] = lists[j][i]
+        return m
+
     def __repr__(self):
         out = []
         for j in range(self.y):
