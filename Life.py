@@ -82,29 +82,50 @@ def live_neighbours(x, y, grid):
     return sum(count)
 
 #==============================================================================
-if (__name__ == "__main__"):
-    m = matrix.Matrix(5, 5)
-    m[2][1] = 1
-    m[2][2] = 1
-    m[2][3] = 1
-    for i in range(10):
-        print m
-        print
-        m = life(m)
-    quit()
-    glider = matrix.Matrix(50, 50)
-    # 0 0 0 0
-    # 0 0 0 1
-    # 0 1 0 1
-    # 0 0 1 1
-    # makes a glider
+def glider(x, y):
+    """
+    Returns an x by y matrix with the top left corner containing this
+    
+    0 0 0 0
+    0 0 0 1
+    0 1 0 1
+    0 0 1 1
+    
+    Precondition: x > 3 and y > 3
+    """
+    assert x > 3 and y > 3
+    glider = matrix.Matrix(x, y)
     glider[3][1] = 1
     glider[1][2] = 1
     glider[3][2] = 1
     glider[2][3] = 1
     glider[3][3] = 1
+    return glider
+
+def blinker(x, y):
+    """
+    Returns an x by y matrix with the top left corner containing this
+    
+    0 0 0 0 0
+    0 0 1 0 0
+    0 0 1 0 0
+    0 0 1 0 0
+    0 0 0 0 0
+    
+    Precondition: x > 4 and y > 4
+    """
+    assert x > 4 and y > 4
+    blinker = matrix.Matrix(x, y)
+    blinker[2][1] = 1
+    blinker[2][2] = 1
+    blinker[2][3] = 1
+    return blinker
+
+#==============================================================================
+if (__name__ == "__main__"):
+    grid = blinker(50, 50)
     for i in range(1000):
         time.sleep(0.25)
-        print(glider)
+        print(grid)
         print
-        glider = life(glider)
+        grid = life(grid)
